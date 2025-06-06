@@ -46,7 +46,7 @@ Before running this application, make sure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/todo-app.git
+git clone https://github.com/SimranShaikh20/todo-app.git
 cd todo-app
 ```
 
@@ -408,8 +408,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
+- GitHub: [Simran Shaikh](https://github.com/SimranShaikh20)
+
 
 ## 🙏 Acknowledgments
 
