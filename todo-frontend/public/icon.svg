@@ -1,0 +1,50 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Main gradient -->
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#A855F7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Inner gradient -->
+    <linearGradient id="innerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.7" />
+    </linearGradient>
+    
+    <!-- Check gradient -->
+    <linearGradient id="checkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Shadow filter -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  
+  <!-- Main background circle -->
+  <circle cx="50" cy="50" r="45" fill="url(#mainGradient)" filter="url(#shadow)"/>
+  
+  <!-- Inner circle with subtle gradient -->
+  <circle cx="50" cy="50" r="38" fill="none" stroke="url(#innerGradient)" stroke-width="1" opacity="0.3"/>
+  
+  <!-- Task list lines -->
+  <rect x="25" y="30" width="35" height="3" rx="1.5" fill="white" opacity="0.8"/>
+  <rect x="25" y="38" width="30" height="3" rx="1.5" fill="white" opacity="0.6"/>
+  <rect x="25" y="46" width="28" height="3" rx="1.5" fill="white" opacity="0.6"/>
+  
+  <!-- Completed task with checkmark -->
+  <rect x="25" y="54" width="25" height="3" rx="1.5" fill="white" opacity="0.4"/>
+  
+  <!-- Main checkmark circle -->
+  <circle cx="65" cy="55" r="12" fill="url(#checkGradient)" filter="url(#shadow)"/>
+  
+  <!-- Checkmark -->
+  <path d="M60 55 L63 58 L70 51" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Subtle highlight on main circle -->
+  <circle cx="42" cy="38" r="8" fill="white" opacity="0.1"/>
+</svg>
