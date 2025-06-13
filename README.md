@@ -1,6 +1,11 @@
-# Todo Application
+# Taskify - Todo Application
 
 A full-stack todo application built with **React** (frontend), **FastAPI** (backend), and **MongoDB** (database). This application allows users to create, read, update, and delete todo items with a modern, responsive interface.
+
+## 🌐 Live Demo
+
+- **Frontend**: [https://taskify-todo-app.web.app](https://taskify-todo-app.web.app)
+- **API Documentation**: [https://your-backend-url.com/docs](https://your-backend-url.com/docs)
 
 ## 🚀 Features
 
@@ -32,6 +37,10 @@ A full-stack todo application built with **React** (frontend), **FastAPI** (back
 ### Database
 - **MongoDB** - NoSQL document database for flexible data storage
 
+### Deployment
+- **Firebase Hosting** - Frontend deployment
+- **Railway/Heroku** - Backend deployment options
+
 ## 📋 Prerequisites
 
 Before running this application, make sure you have the following installed:
@@ -46,8 +55,8 @@ Before running this application, make sure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/SimranShaikh20/todo-app.git
-cd todo-app
+git clone https://github.com/SimranShaikh20/taskify.git
+cd taskify
 ```
 
 ### 2. Backend Setup (FastAPI + MongoDB)
@@ -154,7 +163,7 @@ The frontend will be available at:
 ## 📁 Project Structure
 
 ```
-todo-app/
+taskify/
 ├── __pycache__/                 # Python cache files
 ├── config/
 │   ├── __pycache__/
@@ -191,6 +200,8 @@ todo-app/
 │   │   └── reportWebVitals.js  # Performance monitoring
 │   ├── package.json            # Node.js dependencies
 │   └── package-lock.json       # Dependency lock file
+├── firebase.json               # Firebase configuration
+├── .firebaserc                 # Firebase project settings
 └── main.py                     # FastAPI application entry point
 ```
 
@@ -240,7 +251,7 @@ Edit `.env` file in the root directory to configure:
 ```env
 # Database
 MONGODB_URL=mongodb://localhost:27017
-DATABASE_NAME=todo_app
+DATABASE_NAME=taskify_db
 
 # Server
 HOST=0.0.0.0
@@ -248,7 +259,7 @@ PORT=8000
 DEBUG=True
 
 # CORS (add your frontend URLs)
-CORS_ORIGINS=["http://localhost:3000", "http://127.0.0.1:3000"]
+CORS_ORIGINS=["http://localhost:3000", "https://taskify-todo-app.web.app"]
 ```
 
 ### Frontend Configuration
@@ -256,7 +267,11 @@ CORS_ORIGINS=["http://localhost:3000", "http://127.0.0.1:3000"]
 Update API base URL in your frontend service files:
 
 ```javascript
+// For development
 const API_BASE_URL = 'http://localhost:8000';
+
+// For production
+const API_BASE_URL = 'https://your-backend-url.com';
 ```
 
 ### Tailwind CSS Configuration
@@ -275,6 +290,140 @@ module.exports = {
 }
 ```
 
+## 🚀 Deployment
+
+### 🔥 Firebase Deployment (Frontend)
+
+Deploy your React frontend to Firebase Hosting for free:
+
+#### 1. 📦 Build the React App
+
+```bash
+cd todo-frontend
+npm run build
+```
+
+#### 2. 🔧 Set Up Firebase Hosting
+
+Install Firebase CLI and login (one-time setup):
+
+```bash
+# Install Firebase CLI globally
+npm install -g firebase-tools
+
+# Login to Firebase
+firebase login
+```
+
+#### 3. 🎯 Initialize Firebase
+
+```bash
+cd todo-frontend
+firebase init
+```
+
+**Configuration Options:**
+- ❓ **Which Firebase features?** → Select "Hosting"
+- ❓ **Select a default Firebase project** → Choose existing or create new project
+- ❓ **Public directory** → Enter: `build`
+- ❓ **Configure as single-page app?** → **Yes**
+- ❓ **Set up automatic builds with GitHub?** → **No** (for now)
+- 🚫 **Don't overwrite** `index.html` if prompted
+
+This creates a `firebase.json` file:
+
+```json
+{
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
+```
+
+#### 4. 🚀 Deploy to Firebase
+
+```bash
+firebase deploy
+```
+
+After deployment, you'll get a live URL:
+```
+✅ Deploy complete!
+
+Project Console: https://console.firebase.google.com/project/taskify-todo-app
+Hosting URL: https://taskify-todo-app.web.app
+```
+
+#### 5. 🔄 Future Deployments
+
+For subsequent deployments:
+
+```bash
+# Build the latest changes
+npm run build
+
+# Deploy to Firebase
+firebase deploy
+```
+
+### 🚂 Backend Deployment (Railway/Heroku)
+
+#### Railway Deployment
+
+1. Create `Procfile`:
+```
+web: uvicorn main:app --host 0.0.0.0 --port $PORT
+```
+
+2. Update `requirements.txt`:
+```
+fastapi
+uvicorn[standard]
+motor
+pymongo
+python-multipart
+```
+
+3. Connect your GitHub repo to Railway and deploy.
+
+#### Heroku Deployment
+
+```bash
+# Install Heroku CLI and login
+heroku login
+
+# Create new Heroku app
+heroku create taskify-api
+
+# Set environment variables
+heroku config:set MONGODB_URL=your_mongodb_atlas_url
+heroku config:set DEBUG=False
+
+# Deploy
+git push heroku main
+```
+
+### Environment Variables for Production
+
+Set these environment variables in your deployment platform:
+
+```env
+MONGODB_URL=your_production_mongodb_url
+DEBUG=False
+CORS_ORIGINS=["https://taskify-todo-app.web.app"]
+```
+
 ## 🐛 Troubleshooting
 
 ### Common Issues
@@ -291,7 +440,13 @@ Access to fetch at 'http://localhost:8000' from origin 'http://localhost:3000' h
 ```
 **Solution**: Ensure CORS middleware is properly configured in `main.py`.
 
-#### 3. Port Already in Use
+#### 3. Firebase Deployment - Blank Page
+**Solution**: 
+- Ensure `"public": "build"` in `firebase.json`
+- Check SPA rewrite rule exists
+- Clear browser cache
+
+#### 4. Port Already in Use
 ```
 OSError: [Errno 48] Address already in use
 ```
@@ -303,12 +458,6 @@ lsof -ti:8000 | xargs kill -9
 # Or use different port
 uvicorn main:app --reload --port 8001
 ```
-
-#### 4. Module Not Found Error
-```
-ModuleNotFoundError: No module named 'fastapi'
-```
-**Solution**: Make sure virtual environment is activated and dependencies are installed.
 
 ### Debug Mode
 
@@ -355,44 +504,6 @@ npm test
 npm test -- --coverage
 ```
 
-## 🚀 Deployment
-
-### Backend Deployment (Railway/Heroku)
-
-1. Create `Procfile`:
-```
-web: uvicorn main:app --host 0.0.0.0 --port $PORT
-```
-
-2. Update `requirements.txt`:
-```
-fastapi
-uvicorn[standard]
-motor
-pymongo
-python-multipart
-```
-
-### Frontend Deployment (Vercel/Netlify)
-
-1. Build the project:
-```bash
-cd todo-frontend
-npm run build
-```
-
-2. Deploy the `build` folder to your hosting service.
-
-### Environment Variables for Production
-
-Set these environment variables in your deployment platform:
-
-```env
-MONGODB_URL=your_production_mongodb_url
-DEBUG=False
-CORS_ORIGINS=["https://yourdomain.com"]
-```
-
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -407,9 +518,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**Your Name**
-- GitHub: [Simran Shaikh](https://github.com/SimranShaikh20)
-
+**Simran Shaikh**
+- GitHub: [SimranShaikh20](https://github.com/SimranShaikh20)
+- Project: [Taskify](https://github.com/SimranShaikh20/taskify)
 
 ## 🙏 Acknowledgments
 
@@ -418,7 +529,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [MongoDB](https://www.mongodb.com/) for the flexible database solution
 - [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
 - [Lucide](https://lucide.dev/) for the beautiful icons
+- [Firebase](https://firebase.google.com/) for free and reliable hosting
 
 ---
 
-⭐ **If you found this project helpful, please give it a star!** ⭐
+⭐ **If you found Taskify helpful, please give it a star!** ⭐
+
+🌐 **Live Demo**: [App](https://taskify-1e72c.web.app/)
