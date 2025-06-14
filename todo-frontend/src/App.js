@@ -9,7 +9,7 @@ function App() {
 
   const fetchTodos = async () => {
     try {
-      const res = await fetch('http://localhost:8000/todos');
+      const res = await fetch('https://taskify-4cvi.onrender.com/todos'); // ✅ updated URL
       const data = await res.json();
       setTodos(data);
     } catch (error) {
