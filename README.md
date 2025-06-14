@@ -339,52 +339,9 @@ npm run build
 firebase deploy
 ```
 
-### 🚂 Backend Deployment (Railway/Heroku)
+### 🚂 Backend Deployment (Render)
 
-#### Railway Deployment
-
-1. Create `Procfile`:
-```
-web: uvicorn main:app --host 0.0.0.0 --port $PORT
-```
-
-2. Update `requirements.txt`:
-```
-fastapi
-uvicorn[standard]
-motor
-pymongo
-python-multipart
-```
-
-3. Connect your GitHub repo to Railway and deploy.
-
-#### Heroku Deployment
-
-```bash
-# Install Heroku CLI and login
-heroku login
-
-# Create new Heroku app
-heroku create taskify-api
-
-# Set environment variables
-heroku config:set MONGODB_URL=your_mongodb_atlas_url
-heroku config:set DEBUG=False
-
-# Deploy
-git push heroku main
-```
-
-### Environment Variables for Production
-
-Set these environment variables in your deployment platform:
-
-```env
-MONGODB_URL=your_production_mongodb_url
-DEBUG=False
-CORS_ORIGINS=["https://taskify-todo-app.web.app"]
-```
+Deploy your FastAPI backend easily using [Render](https://render.com):
 
 ## 🐛 Troubleshooting
 
