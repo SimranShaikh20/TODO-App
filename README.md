@@ -219,28 +219,6 @@ The backend provides the following REST API endpoints:
 | `GET` | `/` | API status |
 | `GET` | `/health` | Health check |
 
-### Request/Response Examples
-
-#### Create Todo
-```bash
-curl -X POST "http://localhost:8000/todos/" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "name": "Learn FastAPI",
-       "description": "Study FastAPI documentation and build a project",
-       "completed": false
-     }'
-```
-
-#### Response
-```json
-{
-  "id": "64a7b8c9d1e2f3a4b5c6d7e8",
-  "name": "Learn FastAPI",
-  "description": "Study FastAPI documentation and build a project",
-  "completed": false
-}
-```
 
 ## 🔧 Configuration
 
@@ -272,22 +250,6 @@ const API_BASE_URL = 'http://localhost:8000';
 
 // For production
 const API_BASE_URL = 'https://your-backend-url.com';
-```
-
-### Tailwind CSS Configuration
-
-The `tailwind.config.js` should include:
-
-```javascript
-module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
 ```
 
 ## 🚀 Deployment
