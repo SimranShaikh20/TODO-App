@@ -5,7 +5,10 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # or specify ["http://localhost:3000"] for your React frontend
+    allow_origins=[
+        "http://localhost:3000",
+        "https://taskify-todo-app.web.app"
+    ],  # or specify ["http://localhost:3000"] for your React frontend
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
